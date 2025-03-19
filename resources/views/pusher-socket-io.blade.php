@@ -29,19 +29,6 @@
         function sendMessage() {
             let message = document.getElementById("messageInput").value;
 
-            // Kirim ke Laravel (yang kemudian diteruskan ke Socket.IO)
-            fetch("/send-message", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                    },
-                    body: JSON.stringify({
-                        message: message
-                    })
-                }).then(response => response.json())
-                .then(data => console.log(data));
-
             // Kirim langsung ke Socket.IO
             window.socket.emit("sendMessage", {
                 message
